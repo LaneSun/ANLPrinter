@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ANL Cloud Printer</title>
+    <style>
+        #container{
+            top: 0;
+            left: 0;
+            background-color: #ebebeb;
+            /*padding: 0.2em 1em 0.2em 1.2em;*/
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            margin: 0;
+        }
+        body{
+            background-color: #1c404d;
+            font-size: 48px;
+            user-select: none;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        }
+        html{
+            height: 100%;
+        }
+        .head{
+            background-color: #1f9bff;
+            color: #e1e1e1;
+            width: 100%;
+            padding: 0.4em;
+            margin-bottom: 1em;
+            text-align: left;
+            font-size: 2em;
+            box-shadow: -2px -4px 20px black;
+        }
+        iframe{
+            border: none;
+            height: 8em;
+        }
+        .form{
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div class="head">ANL Cloud Printer</div>
+    <iframe id="frame" class="form"></iframe>
+</div>
+<script>
+    let frame = document.getElementById("frame");
+    frame.contentDocument.body.innerHTML = `
+<link rel="stylesheet" href="uikit.css">
+<style>
+body{
+background-color: rgba(0,0,0,0);
+font-size: 84px;
+}
+html{
+background-color: rgba(0,0,0,0);
+}
+.text-mid{
+font-size: 0.7em;
+}
+.file{
+display: block;
+width: 100%;
+}
+.button{
+height: 2em;
+}
+</style>
+<form action="/upload" enctype="multipart/form-data" method="post">
+<div class="uk-form-file file">
+    <button class="button uk-button uk-button-large uk-width-1-1 text-mid">选择文件</button><input type="file" accept="application/pdf,application/msword,.doc,.docx" name="upload" multiple="multiple">
+</div><br>
+<input class="button uk-button uk-button-large uk-button-success submit uk-width-1-1 text-mid" type="submit" value="上传">
+</form>
+    `;
+</script>
+</body>
+</html>

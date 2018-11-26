@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ANL Cloud Printer</title>
+    <style>
+        #container{
+            border-radius: 5px;
+            top: 1em;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ebebeb;
+            position: absolute;
+            /*padding: 0.2em 1em 0.2em 1.2em;*/
+            width: 600px;
+            overflow: hidden;
+        }
+        body{
+            background-color: #1c404d;
+            font-size: 16px;
+            user-select: none;
+            text-align: center;
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        }
+        .head{
+            background-color: #1f9bff;
+            color: #e1e1e1;
+            width: 100%;
+            padding: 0.4em;
+            margin-bottom: 1em;
+            font-size: 2em;
+            text-align: left;
+            box-shadow: -2px -4px 20px black;
+        }
+        iframe{
+            border: none;
+            height: 9em;
+            overflow: hidden;
+        }
+        .form{
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div class="head">ANL Cloud Printer</div>
+    <iframe id="frame" class="form"></iframe>
+</div>
+<script>
+    let frame = document.getElementById("frame");
+    frame.contentDocument.body.innerHTML = `
+<link rel="stylesheet" href="uikit.css">
+<style>
+body{
+background-color: rgba(0,0,0,0);
+font-size: 32px;
+}
+html{
+background-color: rgba(0,0,0,0);
+}
+.file{
+display: block;
+width: 100%;
+}
+</style>
+<form action="/upload" enctype="multipart/form-data" method="post">
+<div class="uk-form-file file">
+    <button class="uk-button uk-button-large uk-width-1-1">选择文件</button><input type="file" accept="application/pdf,application/msword,.doc,.docx" name="upload" multiple="multiple">
+</div><br>
+<input class="uk-button uk-button-large uk-button-success submit uk-width-1-1" type="submit" value="上传">
+</form>
+    `;
+</script>
+</body>
+</html>
