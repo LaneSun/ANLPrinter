@@ -1,7 +1,8 @@
 const formidable = require('formidable'),
   http = require('http'),
   fs = require('fs'),
-  path = require("./anl-path");
+  path = require("./anl-path"),
+  process = require('child_process');
 
 const UPLOAD_DIR = "upload";
 const ALLOW_TYPE = /(pdf|doc|docx|xls|xlsx)/;
@@ -45,6 +46,9 @@ let uploadHandle = (req, res) => {
         });
     }
 };
+let convertFile = (path) => {
+    process.exec()
+};
 let getCache = (path) => {
     try {
         if (CACHE.has(path)) {
@@ -82,23 +86,22 @@ let getHandle = (req, res) => {
         file = getCache("client/app.html");
         req.url = "client/app.html";
     }
-    res.writeHead(200, req.url);
+    res.writeHead(200, getHead(req.url));
     res.end(file); 
 };
 let getHead = (url) => {
     let extname = path.extname(url);
+    console.log("Extname is: " + extname);
     switch (extname) {
-      case "html":
+      case ".html":
         return {'content-type': 'text/html'};
-        break;
-      case "css":
+      case ".css":
         return {'content-type': 'text/css'};
-        break;
-      case "js":
+      case ".js":
         return {'content-type': 'text/javascript'};
-        break;
+      case ".ico":
+        return {'content-type': 'image/vnd.microsoft.icon'};
       default:
         return {'content-type': 'text/plain'};
-        break;
     }
 };
